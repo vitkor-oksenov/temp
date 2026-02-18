@@ -43,10 +43,33 @@
             80%, 100% { content: ''; }
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
+        /* ПОЛНОЕ СКРЫТИЕ ВЕЗДЕ */
+*::-webkit-scrollbar {
+    display: none;
+}
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+* {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+html, body {
+    overscroll-behavior-y: none; /* Запрещает обновление страницы "потягиванием" вниз */
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Делаем главный контейнер и списки "живыми" */
+main, .overflow-y-auto {
+    overscroll-behavior-y: contain; /* Позволяет контенту пружинить внутри своего окна */
+    -webkit-overflow-scrolling: touch;
+}
         
         .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 
@@ -517,7 +540,7 @@ input[type="checkbox"]:focus {
 
             container.innerHTML = `
                 <div class="max-w-md mx-auto fade-in pb-0 pt-14 md:pt-10 px-4">
-                    <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-4">Тренировка</h1>
+                    <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-6">Тренировка</h1>
                     <div class="grid grid-cols-1 gap-4">
                         
                         <button onclick="app.startStudy('new')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-stone-100 shadow-sm hover:border-stone-300 transition-all text-left group">
@@ -1581,7 +1604,7 @@ Output ONLY valid JSON with this structure:
 
     container.innerHTML = `
         <div class="max-w-md mx-auto fade-in pt-14 md:pt-10 px-4">
-            <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-4">Обзор</h1>
+            <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-6">Обзор</h1>
             
             <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/25 p-5 md:p-6 border border-stone-50">
                 <div class="flex justify-between items-center mb-6">
@@ -1666,8 +1689,8 @@ Output ONLY valid JSON with this structure:
     const activeId = window.appState.activeListId;
     
     container.innerHTML = `
-        <div class="max-w-md mx-auto fade-in pb-24 pt-14 md:pt-10 px-4">
-            <div class="flex items-center justify-between mb-6 mt-4 px-2">
+        <div class="max-w-md mx-auto fade-in pt-14 md:pt-10 px-4">
+            <div class="flex items-center justify-between mb-6 mt-6 px-2">
                 <h1 class="text-2xl font-bold text-stone-800">Карточки</h1>
                 <button onclick="app.openListModal()" class="text-stone-500 hover:text-stone-900 transition flex items-center gap-1.5 text-sm font-bold">
                     <i class="ph-bold ph-plus-circle text-lg"></i>
@@ -1742,8 +1765,8 @@ Output ONLY valid JSON with this structure:
     const user = window.appState.user || {};
 
     container.innerHTML = `
-        <div class="max-w-md mx-auto fade-in pb-24 pt-14 md:pt-10 px-4">
-            <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-4">Настройки</h1>
+        <div class="max-w-md mx-auto fade-in pt-14 md:pt-10 px-4">
+            <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-6">Настройки</h1>
             
             <div class="space-y-6">
                 <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 overflow-hidden border border-stone-50">
@@ -1810,7 +1833,7 @@ Output ONLY valid JSON with this structure:
                     </button>
                 </div>
                 
-                <div class="text-center pb-8">
+                <div class="text-center pb-4">
                      <a href="https://console.groq.com/keys" target="_blank" class="inline-flex items-center gap-2 text-xs text-stone-400 font-medium hover:text-stone-600 transition">
                         <span>Получить бесплатный Groq Key</span>
                         <i class="ph-bold ph-arrow-square-out"></i>
