@@ -291,7 +291,7 @@ input[type="checkbox"]:focus {
         <div class="absolute inset-0 modal-backdrop transition-opacity opacity-0" id="modal-backdrop" onclick="app.closeAddModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-lg bg-white rounded-3xl shadow-2xl p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300" id="modal-card">
             <div class="flex justify-between items-center mb-6">
-                <h2 id="modal-title" class="text-xl font-bold text-stone-800">Новое слово</h2>
+                <h2 id="modal-title" class="text-xl font-bold text-stone-800">Новый вопрос</h2>
                 <button onclick="app.closeAddModal()" class="w-8 h-8 rounded-full bg-stone-50 text-stone-500 hover:bg-stone-100 flex items-center justify-center transition">
                     <i class="ph-light ph-x text-lg"></i>
                 </button>
@@ -567,7 +567,7 @@ input[type="checkbox"]:focus {
                         <button onclick="app.startStudy('new')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-stone-100 shadow-sm hover:border-stone-300 transition-all text-left group">
                             <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"><i class="ph-fill ph-sparkle text-2xl"></i></div>
                             <div class="flex-1">
-                                <div class="font-bold text-stone-800">Новые карточки</div>
+                                <div class="font-bold text-stone-800">Новые</div>
                                 <div class="text-xs text-stone-400">В очереди: ${stats.new}</div>
                             </div>
                         </button>
@@ -579,6 +579,16 @@ input[type="checkbox"]:focus {
                                 <div class="text-xs text-stone-400">Нужно повторить: ${stats.mistakes}</div>
                             </div>
                         </button>
+
+                        <button onclick="app.startStudy('all')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-stone-100 shadow-sm hover:border-emerald-200 transition-all text-left group">
+    <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+        <i class="ph-fill ph-infinity text-2xl"></i>
+    </div>
+    <div class="flex-1">
+        <div class="font-bold text-stone-800">Повторить все</div>
+        <div class="text-xs text-stone-400">Все карточки: ${window.appState.cards.length}</div>
+    </div>
+</button>
 
                         ${activeLists.length > 0 ? `
                         <div class="mt-4">
@@ -595,7 +605,7 @@ input[type="checkbox"]:focus {
                                     <input type="checkbox" name="study-list" value="${list.id}">
                                     <div class="flex-1">
                                         <div class="font-bold text-stone-700 text-sm group-hover:text-stone-900">${escapeHtml(list.name)}</div>
-                                        <div class="text-[10px] text-stone-400 font-medium">${count} слов</div>
+                                        <div class="text-[10px] text-stone-400 font-medium">${count} шт.</div>
                                     </div>
                                 </label>
                                 `;
@@ -839,7 +849,7 @@ input[type="checkbox"]:focus {
     // --- Стили для сброса прогресса ---
     else if (type === 'reset') {
         title.innerText = "Сбросить прогресс?";
-        desc.innerText = "Статистика изученных слов обнулится, но сами карточки останутся в базе.";
+        desc.innerText = "Статистика изученных вопросов обнулится, но сами карточки останутся в базе.";
         icon.className = "ph-fill ph-arrows-counter-clockwise text-amber-500 text-4xl";
         iconBg.className = "w-20 h-20 bg-amber-50 rounded-3xl flex items-center justify-center mx-auto mb-6";
         btn.className = "w-full py-4 rounded-2xl font-bold text-white shadow-lg bg-amber-500 hover:bg-amber-600 shadow-amber-100";
@@ -1147,7 +1157,7 @@ input[type="checkbox"]:focus {
 
             openAddModal: () => {
                 window.appState.editingId = null;
-                document.getElementById('modal-title').innerText = 'Новое слово';
+                document.getElementById('modal-title').innerText = 'Новый вопрос';
                 document.getElementById('modal-submit-text').innerText = 'Добавить';
                 document.getElementById('add-form').reset();
                 app.openModalUI();
@@ -1923,59 +1933,61 @@ const goalPercent = Math.min((cardsReviewedToday / dailyGoal) * 100, 100);
 }
         }
 
-        function renderStudyCard() {
-            const container = document.getElementById('main-container');
-            const card = window.appState.studyQueue[window.appState.currentCardIndex];
-            const currentIndex = window.appState.currentCardIndex;
-            const total = window.appState.studyQueue.length;
-            const progress = ((currentIndex) / total) * 100;
+         function renderStudyCard() {
+    const container = document.getElementById('main-container');
+    const card = window.appState.studyQueue[window.appState.currentCardIndex];
+    const currentIndex = window.appState.currentCardIndex;
+    const total = window.appState.studyQueue.length;
+    const progress = ((currentIndex) / total) * 100;
 
-            container.innerHTML = `
-                <div class="max-w-md mx-auto h-full flex flex-col fade-in pb-2 pt-14 md:pt-10">
-                <div class="mx-6 mb-2 mt-4 flex items-center justify-between shrink-0 h-12">
-                    <button onclick="app.exitStudy()" 
-                        class="w-12 h-12 -ml-3 flex items-center justify-center text-stone-400 hover:text-stone-600 transition-colors active:scale-90"
-                        style="-webkit-tap-highlight-color: transparent;">
-                        <i class="ph-bold ph-caret-left text-2xl"></i>
-                    </button>
+    container.innerHTML = `
+        <div class="max-w-md mx-auto h-full flex flex-col fade-in pb-2 pt-14 md:pt-10">
+            <div class="mx-6 mb-2 mt-4 flex items-center justify-between shrink-0 h-12">
+                <button onclick="app.exitStudy()" 
+                    class="w-12 h-12 -ml-3 flex items-center justify-center text-stone-400 hover:text-stone-600 transition-colors active:scale-90"
+                    style="-webkit-tap-highlight-color: transparent;">
+                    <i class="ph-bold ph-caret-left text-2xl"></i>
+                </button>
 
-                    <div class="flex-1 max-w-[400px] mx-auto bg-stone-200/60 h-2.5 rounded-full overflow-hidden shadow-inner relative">
-                        <div class="bg-gradient-to-r from-amber-400 to-amber-600 h-full transition-all duration-700 ease-out rounded-full shadow-[0_0_8px_rgba(234,88,12,0.3)]" 
-                             style="width: ${progress}%">
-                        </div>
-                    </div>
+                <div class="flex-1 max-w-[400px] mx-auto bg-emerald-50 h-3 rounded-2xl overflow-hidden border border-emerald-100/30 relative">
+    <div class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-full transition-all duration-1000 ease-out rounded-2xl relative" 
+         style="width: ${progress}%">
+        <div class="absolute inset-0 bg-white/20 w-full -skew-x-12 animate-[shimmer_2s_infinite]"></div>
+    </div>
+</div>
 
-                    <span class="text-[11px] font-black uppercase tracking-tighter text-stone-500 tabular-nums">
-                        ${currentIndex + 1} <span class="text-stone-300">/</span> ${total}
-                    </span>
+                <span class="text-[11px] font-black uppercase tracking-tighter text-stone-500 tabular-nums">
+                    ${currentIndex + 1} <span class="text-stone-300">/</span> ${total}
+                </span>
+            </div>
+
+            <div class="mx-4 bg-white rounded-[2rem] shadow-xl border border-stone-100 overflow-hidden flex flex-col flex-1 relative min-h-0 mb-1">
+                <div class="p-6 md:p-8 border-b border-stone-50 bg-white shrink-0 flex items-center justify-center min-h-[25%]">
+                    <h2 class="text-xl md:text-2xl font-bold text-stone-800 text-center leading-tight">${escapeHtml(card.question)}</h2>
                 </div>
 
-                    <div class="mx-4 bg-white rounded-[2rem] shadow-xl border border-stone-100 overflow-hidden flex flex-col flex-1 relative min-h-0 mb-1">
-                        <div class="p-6 md:p-8 border-b border-stone-50 bg-white shrink-0 flex items-center justify-center min-h-[25%]">
-                            <h2 class="text-xl md:text-2xl font-bold text-stone-800 text-center leading-tight">${escapeHtml(card.question)}</h2>
-                        </div>
-
-                        <div id="interaction-area" class="flex-1 bg-stone-50/50 p-4 flex flex-col min-h-0">
-                            <div class="flex flex-col gap-3 h-full">
-                                <textarea id="study-input" class="w-full flex-1 p-4 bg-white border-none rounded-xl focus:ring-2 focus:ring-amber-100 outline-none transition text-base resize-none shadow-sm placeholder-stone-300" placeholder="Ваш ответ..."></textarea>
-                                
-                                <div class="grid grid-cols-3 gap-2 shrink-0">
-                                    <button onclick="app.skipCard()" class="col-span-1 bg-white text-stone-400 py-3 rounded-xl font-bold hover:bg-stone-50 transition text-xs border border-stone-100">
-                                        Пропуск
-                                    </button>
-                                    <button id="submit-btn" onclick="app.submitAnswer()" class="col-span-2 bg-stone-900 text-white py-3 rounded-xl font-bold hover:bg-stone-800 transition shadow-md flex items-center justify-center gap-2 text-sm">
-                                        <span id="submit-btn-text">Проверить</span>
-                                    </button>
-                                </div>
-                            </div>
+                <div id="interaction-area" class="flex-1 bg-stone-50/50 p-4 flex flex-col min-h-0">
+                    <div class="flex flex-col gap-3 h-full">
+                        <textarea id="study-input" class="w-full flex-1 p-4 bg-white border-none rounded-xl focus:ring-2 focus:ring-amber-100 outline-none transition text-base resize-none shadow-sm placeholder-stone-300" placeholder="Ваш ответ..."></textarea>
+                        
+                        <div class="grid grid-cols-3 gap-2 shrink-0">
+                            <button onclick="app.skipCard()" class="col-span-1 bg-white text-stone-400 py-3 rounded-xl font-bold hover:bg-stone-50 transition text-xs border border-stone-100">
+                                Пропуск
+                            </button>
+                            <button id="submit-btn" onclick="app.submitAnswer()" class="col-span-2 bg-stone-900 text-white py-3 rounded-xl font-bold hover:bg-stone-800 transition shadow-md flex items-center justify-center gap-2 text-sm">
+                                <span id="submit-btn-text">Проверить</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-            `;
-            if(window.innerWidth > 768) {
-                setTimeout(() => document.getElementById('study-input')?.focus(), 100);
-            }
-        }
+            </div>
+        </div>
+    `;
+    if(window.innerWidth > 768) {
+        setTimeout(() => document.getElementById('study-input')?.focus(), 100);
+    }
+}
+
     </script>
 </body>
 </html>
