@@ -58,7 +58,7 @@
 }
 
 html, body {
-    overscroll-behavior-y: none; /* Запрещает обновление страницы "потягиванием" вниз */
+    overscroll-behavior-y: auto; 
     height: 100%;
     position: fixed;
     width: 100%;
@@ -67,8 +67,9 @@ html, body {
 
 /* Делаем главный контейнер и списки "живыми" */
 main, .overflow-y-auto {
-    overscroll-behavior-y: contain; /* Позволяет контенту пружинить внутри своего окна */
-    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll; /* Лучше использовать scroll вместо auto для iOS */
+    overscroll-behavior-y: auto; /* Возвращаем нативное поведение */
+    -webkit-overflow-scrolling: touch; /* Магия для плавности на старых iOS */
 }
         
         .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
