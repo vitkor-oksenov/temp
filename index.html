@@ -9,7 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        body { font-family: 'Inter', sans-serif; background-color: #f0f2f5; }
+        body { font-family: 'Inter', sans-serif; background-color: #fdf6e3; }
         
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         .slide-up { animation: slideUp 0.3s ease-out forwards; }
@@ -28,6 +28,10 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        .custom-bottom-nav {
+    bottom: calc(env(safe-area-inset-bottom) + 16px);
+}
+
         .loading-dots:after {
             content: ' .';
             animation: dots 1s steps(5, end) infinite;
@@ -41,13 +45,13 @@
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
         
         .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 
         .modal-backdrop {
-            background-color: rgba(15, 23, 42, 0.4);
+            background-color: rgba(28, 25, 23, 0.4);
             backdrop-filter: blur(4px);
         }
         
@@ -65,37 +69,37 @@
         }
     </style>
 </head>
-<body class="text-slate-800 h-screen w-screen flex overflow-hidden bg-[#f0f2f5]">
+<body class="text-stone-800 h-screen w-screen flex overflow-hidden bg-[#fafaf9]">
 
     <!-- AUTH CONTAINER (Visible initially) -->
-    <div id="auth-container" class="fixed inset-0 z-50 bg-[#f0f2f5] flex items-center justify-center p-4">
+    <div id="auth-container" class="fixed inset-0 z-50 bg-[#fafaf9] flex items-center justify-center p-4">
         <div class="w-full max-w-md bg-white rounded-[2.5rem] shadow-xl p-8 md:p-10 fade-in">
             <div class="text-center mb-8">
-                <span class="font-bold text-2xl tracking-tight text-slate-800">Interview<span class="text-blue-600">AI</span></span>
-                <p class="text-slate-400 text-sm mt-2 font-medium" id="auth-subtitle">Войдите, чтобы продолжить обучение</p>
+                <span class="font-bold text-2xl tracking-tight text-stone-800">Interview<span class="text-stone-500">AI</span></span>
+                <p class="text-stone-400 text-sm mt-2 font-medium" id="auth-subtitle">Войдите, чтобы продолжить обучение</p>
             </div>
 
             <!-- Login Form -->
             <form id="login-form" onsubmit="app.handleLogin(event)" class="space-y-5 block">
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Email</label>
-                    <input type="email" id="login-email" required class="auth-input w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800" placeholder="hello@example.com">
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 ml-1">Email</label>
+                    <input type="email" id="login-email" required class="auth-input w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800" placeholder="hello@example.com">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Пароль</label>
-                    <input type="password" id="login-password" required class="auth-input w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800" placeholder="••••••••">
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 ml-1">Пароль</label>
+                    <input type="password" id="login-password" required class="auth-input w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800" placeholder="••••••••">
                 </div>
                 
                 <div id="login-error" class="hidden text-rose-500 text-sm text-center font-medium bg-rose-50 p-3 rounded-xl"></div>
 
-                <button type="submit" id="login-btn" class="w-full bg-slate-900 text-white py-4 rounded-2xl hover:bg-slate-800 transition shadow-lg shadow-slate-200 font-bold text-sm flex items-center justify-center gap-2">
+                <button type="submit" id="login-btn" class="w-full bg-stone-900 text-white py-4 rounded-2xl hover:bg-stone-800 transition shadow-lg shadow-stone-200 font-bold text-sm flex items-center justify-center gap-2">
                     <span>Войти</span>
                     <i class="ph-bold ph-arrow-right"></i>
                 </button>
 
                 <div class="text-center mt-6">
-                    <button type="button" onclick="app.toggleAuthMode('register')" class="text-slate-500 text-sm hover:text-blue-600 font-medium transition">
-                        Нет аккаунта? <span class="text-blue-600 underline decoration-blue-200 underline-offset-4">Регистрация</span>
+                    <button type="button" onclick="app.toggleAuthMode('register')" class="text-stone-500 text-sm hover:text-stone-800 font-medium transition">
+                        Нет аккаунта? <span class="text-stone-800 underline decoration-stone-200 underline-offset-4">Регистрация</span>
                     </button>
                 </div>
             </form>
@@ -103,28 +107,28 @@
             <!-- Register Form (Hidden) -->
             <form id="register-form" onsubmit="app.handleRegister(event)" class="space-y-5 hidden">
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Email</label>
-                    <input type="email" id="reg-email" required class="auth-input w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800" placeholder="Ваш email">
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 ml-1">Email</label>
+                    <input type="email" id="reg-email" required class="auth-input w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800" placeholder="Ваш email">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Пароль</label>
-                    <input type="password" id="reg-password" required minlength="6" class="auth-input w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800" placeholder="Минимум 6 символов">
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 ml-1">Пароль</label>
+                    <input type="password" id="reg-password" required minlength="6" class="auth-input w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800" placeholder="Минимум 6 символов">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Повторите пароль</label>
-                    <input type="password" id="reg-password-confirm" required minlength="6" class="auth-input w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800" placeholder="••••••••">
+                    <label class="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2 ml-1">Повторите пароль</label>
+                    <input type="password" id="reg-password-confirm" required minlength="6" class="auth-input w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800" placeholder="••••••••">
                 </div>
 
                 <div id="reg-error" class="hidden text-rose-500 text-sm text-center font-medium bg-rose-50 p-3 rounded-xl"></div>
 
-                <button type="submit" id="reg-btn" class="w-full bg-blue-600 text-white py-4 rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 font-bold text-sm flex items-center justify-center gap-2">
+                <button type="submit" id="reg-btn" class="w-full bg-stone-900 text-white py-4 rounded-2xl hover:bg-stone-800 transition shadow-lg shadow-stone-200 font-bold text-sm flex items-center justify-center gap-2">
                     <span>Создать аккаунт</span>
                     <i class="ph-bold ph-user-plus"></i>
                 </button>
 
                 <div class="text-center mt-6">
-                    <button type="button" onclick="app.toggleAuthMode('login')" class="text-slate-500 text-sm hover:text-blue-600 font-medium transition">
-                        Уже есть аккаунт? <span class="text-blue-600 underline decoration-blue-200 underline-offset-4">Войти</span>
+                    <button type="button" onclick="app.toggleAuthMode('login')" class="text-stone-500 text-sm hover:text-stone-800 font-medium transition">
+                        Уже есть аккаунт? <span class="text-stone-800 underline decoration-stone-200 underline-offset-4">Войти</span>
                     </button>
                 </div>
             </form>
@@ -132,63 +136,63 @@
     </div>
 
     <!-- MAIN APP CONTAINER (Hidden initially) -->
-    <div id="app-container" class="hidden flex-1 flex h-full relative min-w-0 bg-[#f0f2f5] w-full">
+    <div id="app-container" class="hidden flex-1 flex h-full relative min-w-0 bg-[#fafaf9] w-full">
         
-        <aside class="hidden md:flex w-72 bg-white border-r border-slate-200 flex-col z-20 shadow-[4px_0_24px_rgba(0,0,0,0.02)] flex-shrink-0">
-            <div class="h-20 flex items-center px-8 border-b border-slate-50 justify-center mt-14">
-                <span class="font-bold text-xl tracking-tight text-slate-800">Interview<span class="text-blue-600">AI</span></span>
+        <aside class="hidden md:flex w-72 bg-white border-r border-stone-200 flex-col z-20 shadow-[4px_0_24px_rgba(0,0,0,0.02)] flex-shrink-0">
+            <div class="h-20 flex items-center px-8 border-b border-stone-50 justify-center mt-14">
+                <span class="font-bold text-xl tracking-tight text-stone-800">Interview<span class="text-amber-700">AI</span></span>
             </div>
             
             <nav class="flex-1 p-6 space-y-2 overflow-y-auto flex flex-col justify-center -mt-20">
-                <button onclick="app.navigate('dashboard')" id="nav-dashboard" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-blue-600 transition-all font-medium text-left group">
-                    <i class="ph-light ph-chart-pie-slice text-xl group-hover:scale-110 transition-transform"></i> Обзор
+                <button onclick="app.navigate('dashboard')" id="nav-dashboard" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-stone-500 hover:bg-stone-50 hover:text-stone-900 transition-all font-semibold text-left group">
+                    <i class="ph ph-chart-pie-slice text-xl group-hover:scale-110 transition-transform"></i> Обзор
                 </button>
-                <button onclick="app.navigate('cards')" id="nav-cards" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-blue-600 transition-all font-medium text-left group">
-                    <i class="ph-light ph-cards text-xl group-hover:scale-110 transition-transform"></i> Карточки
+                <button onclick="app.navigate('cards')" id="nav-cards" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-stone-500 hover:bg-stone-50 hover:text-stone-900 transition-all font-semibold text-left group">
+                    <i class="ph ph-cards text-xl group-hover:scale-110 transition-transform"></i> Карточки
                 </button>
-                <button onclick="app.navigate('study')" id="nav-study" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-blue-600 transition-all font-medium text-left group">
-                    <i class="ph-light ph-student text-xl group-hover:scale-110 transition-transform"></i> Тренировка
+                <button onclick="app.navigate('study')" id="nav-study" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-stone-500 hover:bg-stone-50 hover:text-stone-900 transition-all font-semibold text-left group">
+                    <i class="ph ph-student text-xl group-hover:scale-110 transition-transform"></i> Тренировка
                 </button>
-                <button onclick="app.navigate('settings')" id="nav-settings" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-blue-600 transition-all font-medium text-left group">
-                    <i class="ph-light ph-sliders-horizontal text-xl group-hover:scale-110 transition-transform"></i> Настройки
+                <button onclick="app.navigate('settings')" id="nav-settings" class="nav-item w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-stone-500 hover:bg-stone-50 hover:text-stone-900 transition-all font-semibold text-left group">
+                    <i class="ph ph-sliders-horizontal text-xl group-hover:scale-110 transition-transform"></i> Настройки
                 </button>
             </nav>
 
-            <div class="p-6 border-t border-slate-50">
-                <button onclick="app.handleLogout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-rose-500 hover:bg-rose-50 transition-all font-medium text-sm">
+            <div class="p-6 border-t border-stone-50">
+                <button onclick="app.handleLogout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-stone-400 hover:text-rose-500 hover:bg-rose-50 transition-all font-semibold text-sm">
                     <i class="ph-bold ph-sign-out text-lg"></i> Выйти
                 </button>
             </div>
         </aside>
 
-        <div class="flex-1 flex flex-col h-full relative min-w-0 bg-[#f0f2f5] w-full">
+        <div class="flex-1 flex flex-col h-full relative min-w-0 bg-[#fafaf9] w-full">
             
-            <header class="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#f0f2f5] flex items-center justify-center z-50 border-b border-slate-200">
-                 <span class="font-bold text-xl tracking-tight text-slate-700">interview<span class="text-blue-600">ai</span></span>
+            <header class="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#fafaf9] flex items-center justify-center z-50 border-b border-stone-200">
+                 <span class="font-bold text-xl tracking-tight text-stone-700">interview<span class="text-amber-700">ai</span></span>
             </header>
     
             <main class="flex-1 overflow-y-auto p-0 md:px-10 md:pb-10 md:pt-0 scroll-smooth pb-24 md:pb-10 w-full" id="main-container">
                 <div class="h-full flex flex-col items-center justify-center">
-                    <i class="ph-light ph-spinner animate-spin text-4xl text-blue-500 mb-4"></i>
-                    <span class="text-slate-400 text-sm">Загрузка базы знаний...</span>
+                    <i class="ph-light ph-spinner animate-spin text-4xl text-stone-400 mb-4"></i>
+                    <span class="text-stone-400 text-sm">Загрузка базы знаний...</span>
                 </div>
             </main>
     
-            <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-200/50 flex justify-around p-2 z-40 pb-safe shadow-lg">
+            <nav class="md:hidden fixed custom-bottom-nav bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-stone-200/50 flex justify-around p-2 z-40 pb-safe shadow-lg">
                  <button onclick="app.navigate('dashboard')" class="mob-nav-item flex flex-col items-center p-2 rounded-xl w-16 transition-colors" id="mob-nav-dashboard">
-                    <i class="ph-light ph-chart-pie-slice text-2xl mb-0.5"></i>
+                    <i class="ph ph-chart-pie-slice text-2xl mb-0.5"></i>
                     <span class="text-[10px] font-medium">Обзор</span>
                  </button>
                  <button onclick="app.navigate('cards')" class="mob-nav-item flex flex-col items-center p-2 rounded-xl w-16 transition-colors" id="mob-nav-cards">
-                    <i class="ph-light ph-cards text-2xl mb-0.5"></i>
+                    <i class="ph ph-cards text-2xl mb-0.5"></i>
                     <span class="text-[10px] font-medium">Карточки</span>
                  </button>
                  <button onclick="app.navigate('study')" class="mob-nav-item flex flex-col items-center p-2 rounded-xl w-16 transition-colors" id="mob-nav-study">
-                    <i class="ph-light ph-student text-2xl mb-0.5"></i>
+                    <i class="ph ph-student text-2xl mb-0.5"></i>
                     <span class="text-[10px] font-medium">Тренировка</span>
                  </button>
                  <button onclick="app.navigate('settings')" class="mob-nav-item flex flex-col items-center p-2 rounded-xl w-16 transition-colors" id="mob-nav-settings">
-                    <i class="ph-light ph-sliders-horizontal text-2xl mb-0.5"></i>
+                    <i class="ph ph-sliders-horizontal text-2xl mb-0.5"></i>
                     <span class="text-[10px] font-medium">Настройки</span>
                  </button>
             </nav>
@@ -200,28 +204,28 @@
         <div class="absolute inset-0 modal-backdrop transition-opacity opacity-0" id="modal-backdrop" onclick="app.closeAddModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-lg bg-white rounded-3xl shadow-2xl p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300" id="modal-card">
             <div class="flex justify-between items-center mb-6">
-                <h2 id="modal-title" class="text-xl font-bold text-slate-800">Новое слово</h2>
-                <button onclick="app.closeAddModal()" class="w-8 h-8 rounded-full bg-slate-50 text-slate-500 hover:bg-slate-100 flex items-center justify-center transition">
+                <h2 id="modal-title" class="text-xl font-bold text-stone-800">Новое слово</h2>
+                <button onclick="app.closeAddModal()" class="w-8 h-8 rounded-full bg-stone-50 text-stone-500 hover:bg-stone-100 flex items-center justify-center transition">
                     <i class="ph-light ph-x text-lg"></i>
                 </button>
             </div>
             <form id="add-form" onsubmit="app.saveCard(event)" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Вопрос / Термин</label>
-                    <textarea id="q-input" rows="2" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800 resize-none text-base" placeholder="Введите вопрос..."></textarea>
+                    <label class="block text-sm font-semibold text-stone-700 mb-1.5">Вопрос / Термин</label>
+                    <textarea id="q-input" rows="2" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800 resize-none text-base" placeholder="Введите вопрос..."></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Ответ / Определение</label>
-                    <textarea id="a-input" rows="5" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition text-slate-600 text-base leading-relaxed" placeholder="Введите ответ..."></textarea>
+                    <label class="block text-sm font-semibold text-stone-700 mb-1.5">Ответ / Определение</label>
+                    <textarea id="a-input" rows="5" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition text-stone-600 text-base leading-relaxed" placeholder="Введите ответ..."></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Список / Тема</label>
-                    <select id="list-input" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white outline-none transition text-base">
+                    <label class="block text-sm font-semibold text-stone-700 mb-1.5">Список / Тема</label>
+                    <select id="list-input" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white outline-none transition text-base">
                         <option value="">Без списка</option>
                     </select>
                 </div>
                 <div class="flex items-center justify-end gap-3 pt-2">
-                    <button id="modal-submit-btn" type="submit" class="w-full bg-slate-900 text-white px-6 py-3.5 rounded-2xl hover:bg-slate-800 transition shadow-lg font-bold flex items-center justify-center gap-2 text-sm">
+                    <button id="modal-submit-btn" type="submit" class="w-full bg-stone-900 text-white px-6 py-3.5 rounded-2xl hover:bg-stone-800 transition shadow-lg font-bold flex items-center justify-center gap-2 text-sm">
                         <span id="modal-submit-text">Добавить</span>
                     </button>
                 </div>
@@ -233,22 +237,22 @@
         <div class="absolute inset-0 modal-backdrop transition-opacity opacity-0" id="bulk-backdrop" onclick="app.closeBulkModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-2xl bg-white rounded-3xl shadow-2xl p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300" id="bulk-card">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-slate-800">Массовый импорт</h2>
-                <button onclick="app.closeBulkModal()" class="w-8 h-8 rounded-full bg-slate-50 text-slate-500 hover:bg-slate-100 flex items-center justify-center transition">
+                <h2 class="text-xl font-bold text-stone-800">Массовый импорт</h2>
+                <button onclick="app.closeBulkModal()" class="w-8 h-8 rounded-full bg-stone-50 text-stone-500 hover:bg-stone-100 flex items-center justify-center transition">
                     <i class="ph-light ph-x text-lg"></i>
                 </button>
             </div>
-            <p class="text-xs text-slate-500 mb-4 leading-relaxed">
-                Формат: <strong class="text-slate-700">Название списка | Вопрос | Ответ</strong><br>
-                <span class="text-blue-500">Если списка нет, он создастся автоматически.</span>
+            <p class="text-xs text-stone-500 mb-4 leading-relaxed">
+                Формат: <strong class="text-stone-700">Название списка | Вопрос | Ответ</strong><br>
+                <span class="text-amber-600">Если списка нет, он создастся автоматически.</span>
             </p>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Разделитель (между вопросом и ответом)</label>
-                    <input type="text" id="bulk-separator" value="|" class="w-20 p-2 bg-slate-50 border border-slate-200 rounded-xl text-center font-bold outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-sm font-semibold text-stone-700 mb-1.5">Разделитель (между вопросом и ответом)</label>
+                    <input type="text" id="bulk-separator" value="|" class="w-20 p-2 bg-stone-50 border border-stone-200 rounded-xl text-center font-bold outline-none focus:ring-2 focus:ring-stone-400">
                 </div>
-                <textarea id="bulk-input" rows="10" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition text-sm font-mono leading-relaxed resize-none" placeholder="JavaScript | Что такое замыкание? | Это функция + окружение&#10;React | Что такое JSX? | Расширение синтаксиса JS"></textarea>
-                <button id="bulk-submit-btn" onclick="app.saveBulkCards()" class="w-full bg-blue-600 text-white py-4 rounded-2xl hover:bg-blue-700 transition shadow-lg font-bold flex items-center justify-center gap-2">
+                <textarea id="bulk-input" rows="10" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition text-sm font-mono leading-relaxed resize-none" placeholder="JavaScript | Что такое замыкание? | Это функция + окружение&#10;React | Что такое JSX? | Расширение синтаксиса JS"></textarea>
+                <button id="bulk-submit-btn" onclick="app.saveBulkCards()" class="w-full bg-stone-900 text-white py-4 rounded-2xl hover:bg-stone-800 transition shadow-lg font-bold flex items-center justify-center gap-2">
                     <span id="bulk-submit-text">Импортировать карточки</span>
                 </button>
             </div>
@@ -262,14 +266,14 @@
                 <div id="confirm-icon-bg" class="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6">
                     <i id="confirm-icon" class="ph-fill text-4xl"></i>
                 </div>
-                <h2 id="confirm-title" class="text-xl font-bold text-slate-800 mb-2">Вы уверены?</h2>
-                <p id="confirm-desc" class="text-slate-500 text-sm mb-8 leading-relaxed px-2"></p>
+                <h2 id="confirm-title" class="text-xl font-bold text-stone-800 mb-2">Вы уверены?</h2>
+                <p id="confirm-desc" class="text-stone-500 text-sm mb-8 leading-relaxed px-2"></p>
                 
                 <div class="flex flex-col gap-3">
                     <button id="confirm-action-btn" onclick="app.executeConfirmedAction()" class="w-full py-4 rounded-2xl font-bold text-white shadow-lg transition-all active:scale-95">
                         Подтвердить
                     </button>
-                    <button onclick="app.closeConfirmModal()" class="w-full py-4 rounded-2xl font-bold text-slate-400 hover:bg-slate-50 transition-all">
+                    <button onclick="app.closeConfirmModal()" class="w-full py-4 rounded-2xl font-bold text-stone-400 hover:bg-stone-50 transition-all">
                         Отмена
                     </button>
                 </div>
@@ -281,29 +285,29 @@
         <div class="absolute inset-0 modal-backdrop transition-opacity opacity-0" id="list-backdrop" onclick="app.closeListModal()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-sm bg-white rounded-[2.5rem] shadow-2xl p-8 transform scale-95 opacity-0 transition-all duration-300" id="list-card">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-slate-800">Новый список</h2>
-                <button onclick="app.closeListModal()" class="w-8 h-8 rounded-full bg-slate-50 text-slate-500 flex items-center justify-center transition hover:bg-slate-100">
+                <h2 class="text-xl font-bold text-stone-800">Новый список</h2>
+                <button onclick="app.closeListModal()" class="w-8 h-8 rounded-full bg-stone-50 text-stone-500 flex items-center justify-center transition hover:bg-stone-100">
                     <i class="ph-light ph-x"></i>
                 </button>
             </div>
             
             <div class="space-y-6">
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Название темы</label>
+                    <label class="block text-sm font-semibold text-stone-700 mb-2">Название темы</label>
                     <input type="text" id="list-name-input" 
-                        class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-medium text-slate-800" 
+                        class="w-full p-4 bg-stone-50 border border-stone-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-medium text-stone-800" 
                         placeholder="Например: JavaScript, React...">
                 </div>
                 
-                <button id="list-submit-btn" onclick="app.saveList()" class="w-full bg-blue-600 text-white py-4 rounded-2xl hover:bg-blue-700 transition shadow-lg font-bold flex items-center justify-center gap-2">
+                <button id="list-submit-btn" onclick="app.saveList()" class="w-full bg-stone-900 text-white py-4 rounded-2xl hover:bg-stone-800 transition shadow-lg font-bold flex items-center justify-center gap-2">
                     <span id="list-submit-text">Создать список</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 z-[70] opacity-0 pointer-events-none translate-y-[-20px] flex items-center gap-3 font-medium text-sm w-max max-w-[90vw] backdrop-blur-md bg-slate-800/90">
-        <i class="ph-light ph-info text-blue-400 text-lg"></i>
+    <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-stone-800 text-white px-6 py-3 rounded-full shadow-2xl transition-all duration-300 z-[70] opacity-0 pointer-events-none translate-y-[-20px] flex items-center gap-3 font-medium text-sm w-max max-w-[90vw] backdrop-blur-md bg-stone-800/90">
+        <i class="ph-light ph-info text-amber-400 text-lg"></i>
         <span id="toast-msg">Notification</span>
     </div>
 
@@ -356,7 +360,7 @@
             currentView: 'dashboard',
             studyQueue: [],
             currentCardIndex: 0,
-            geminiKey: localStorage.getItem('gemini_api_key') || '',
+            groqKey: localStorage.getItem('groq_api_key') || '',
             stats: { total: 0, learned: 0, accuracy: 0, chartData: [] },
             isProcessing: false,
             editingId: null,
@@ -431,18 +435,18 @@
         function renderResumeChoice(container) {
             container.innerHTML = `
                 <div class="max-w-md mx-auto fade-in h-full flex flex-col justify-center px-6">
-                    <div class="bg-white rounded-[2.5rem] shadow-xl p-8 text-center border border-slate-100">
-                        <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                    <div class="bg-white rounded-[2.5rem] shadow-xl p-8 text-center border border-stone-100">
+                        <div class="w-20 h-20 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
                             <i class="ph-fill ph-ClockCounterClockwise text-4xl"></i>
                         </div>
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Продолжить?</h2>
-                        <p class="text-slate-500 mb-8 leading-relaxed">У вас есть незавершенная тренировка. Хотите вернуться к ней или начать новую сессию?</p>
+                        <h2 class="text-2xl font-bold text-stone-800 mb-2">Продолжить?</h2>
+                        <p class="text-stone-500 mb-8 leading-relaxed">У вас есть незавершенная тренировка. Хотите вернуться к ней или начать новую сессию?</p>
                         
                         <div class="flex flex-col gap-3">
-                            <button onclick="app.resumeSession()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all active:scale-95">
+                            <button onclick="app.resumeSession()" class="w-full py-4 bg-stone-900 text-white rounded-2xl font-bold shadow-lg shadow-stone-200 hover:bg-stone-800 transition-all active:scale-95">
                                 Продолжить текущую
                             </button>
-                            <button onclick="app.restartSession()" class="w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-slate-200 transition-all">
+                            <button onclick="app.restartSession()" class="w-full py-4 bg-stone-100 text-stone-600 rounded-2xl font-bold hover:bg-stone-200 transition-all">
                                 Начать заново
                             </button>
                         </div>
@@ -470,40 +474,51 @@
 
             container.innerHTML = `
                 <div class="max-w-md mx-auto fade-in pb-24 pt-14 md:pt-10 px-4">
-                    <h1 class="text-2xl font-bold text-slate-800 mb-6 px-2">Тренировка</h1>
+                    <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2">Тренировка</h1>
                     <div class="grid grid-cols-1 gap-4">
                         
-                        <button onclick="app.startStudy('new')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-slate-100 shadow-sm hover:border-blue-200 transition-all text-left group">
+                        <button onclick="app.startStudy('new')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-stone-100 shadow-sm hover:border-stone-300 transition-all text-left group">
                             <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"><i class="ph-fill ph-sparkle text-2xl"></i></div>
                             <div class="flex-1">
-                                <div class="font-bold text-slate-800">Новые карточки</div>
-                                <div class="text-xs text-slate-400">В очереди: ${stats.new}</div>
+                                <div class="font-bold text-stone-800">Новые карточки</div>
+                                <div class="text-xs text-stone-400">В очереди: ${stats.new}</div>
                             </div>
                         </button>
 
-                        <button onclick="app.startStudy('mistakes')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-slate-100 shadow-sm hover:border-rose-200 transition-all text-left group">
+                        <button onclick="app.startStudy('mistakes')" class="flex items-center gap-4 p-4 bg-white rounded-3xl border border-stone-100 shadow-sm hover:border-rose-200 transition-all text-left group">
                             <div class="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform"><i class="ph-fill ph-warning-circle text-2xl"></i></div>
                             <div class="flex-1">
-                                <div class="font-bold text-slate-800">Ошибки</div>
-                                <div class="text-xs text-slate-400">Нужно повторить: ${stats.mistakes}</div>
+                                <div class="font-bold text-stone-800">Ошибки</div>
+                                <div class="text-xs text-stone-400">Нужно повторить: ${stats.mistakes}</div>
                             </div>
                         </button>
 
                         ${activeLists.length > 0 ? `
                         <div class="mt-4">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 ml-2">По темам</h3>
+                            <div class="flex items-center justify-between mb-3 px-2">
+                                <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wider">Выбор тем</h3>
+                                <button onclick="document.querySelectorAll('input[name=\\'study-list\\']').forEach(el => el.checked = true)" class="text-[10px] font-bold text-stone-400 hover:text-stone-800 transition">Выбрать все</button>
+                            </div>
+                            
+                            <div class="bg-white rounded-[2rem] shadow-sm border border-stone-100 p-2 space-y-1">
                             ${activeLists.map(list => {
                                 const count = listCounts[list.id];
                                 return `
-                                <button onclick="app.startStudy('list', '${list.id}')" class="w-full flex items-center justify-between p-4 mb-2 bg-white hover:bg-slate-50 border border-slate-100 rounded-2xl transition-all shadow-sm group">
-                                    <div class="flex flex-col text-left">
-                                        <span class="font-bold text-slate-700 text-sm">${escapeHtml(list.name)}</span>
-                                        <span class="text-[10px] text-slate-400 font-medium">Карточек: ${count}</span>
+                                <label class="flex items-center gap-3 p-3 hover:bg-stone-50 rounded-2xl cursor-pointer transition-colors group select-none">
+                                    <input type="checkbox" name="study-list" value="${list.id}" class="w-5 h-5 rounded-lg border-2 border-stone-200 text-stone-800 focus:ring-0 focus:ring-offset-0 bg-stone-50 checked:bg-stone-800 checked:border-stone-800 transition-all cursor-pointer">
+                                    <div class="flex-1">
+                                        <div class="font-bold text-stone-700 text-sm group-hover:text-stone-900">${escapeHtml(list.name)}</div>
+                                        <div class="text-[10px] text-stone-400 font-medium">${count} слов</div>
                                     </div>
-                                    <i class="ph-bold ph-caret-right text-slate-300 group-hover:text-blue-500 transition-colors"></i>
-                                </button>
+                                </label>
                                 `;
                             }).join('')}
+                            </div>
+
+                            <button onclick="app.startMultiListStudy()" class="w-full mt-4 bg-stone-900 text-white py-4 rounded-2xl hover:bg-stone-800 transition shadow-lg shadow-stone-200 font-bold text-sm flex items-center justify-center gap-2">
+                                <span>Начать выбранные</span>
+                                <i class="ph-bold ph-play-circle text-lg"></i>
+                            </button>
                         </div>
                         ` : ''}
                     </div>
@@ -733,9 +748,9 @@
     else if (type === 'logout') {
         title.innerText = "Выход из аккаунта";
         desc.innerText = "Вы уверены, что хотите выйти из приложения?";
-        icon.className = "ph-fill ph-sign-out text-slate-600 text-4xl"; // Нейтральный цвет
-        iconBg.className = "w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-6";
-        btn.className = "w-full py-4 rounded-2xl font-bold text-white shadow-lg bg-slate-800 hover:bg-slate-900 shadow-slate-200";
+        icon.className = "ph-fill ph-sign-out text-stone-600 text-4xl"; // Нейтральный цвет
+        iconBg.className = "w-20 h-20 bg-stone-100 rounded-3xl flex items-center justify-center mx-auto mb-6";
+        btn.className = "w-full py-4 rounded-2xl font-bold text-white shadow-lg bg-stone-800 hover:bg-stone-900 shadow-stone-200";
         btn.innerText = "Выйти";
     }
 
@@ -759,6 +774,18 @@
                 prepareStudySession(mode, listId);
                 saveSession();
                 render();
+            },
+
+            startMultiListStudy: () => {
+                const checkedBoxes = document.querySelectorAll('input[name="study-list"]:checked');
+                const selectedIds = Array.from(checkedBoxes).map(cb => cb.value);
+                
+                if (selectedIds.length === 0) {
+                    showToast("Выберите хотя бы одну тему", true);
+                    return;
+                }
+                
+                app.startStudy('multi', selectedIds);
             },
 
             openListModal: () => {
@@ -1141,8 +1168,8 @@
 
             saveSettings: () => {
                 const key = document.getElementById('api-key-input').value.trim();
-                localStorage.setItem('gemini_api_key', key);
-                window.appState.geminiKey = key;
+                localStorage.setItem('groq_api_key', key);
+                window.appState.groqKey = key;
                 app.navigate('dashboard');
             },
             
@@ -1226,7 +1253,7 @@
             const container = document.getElementById('interaction-area');
             if(!container) return;
 
-            container.className = 'flex-1 bg-slate-50/80 p-3 overflow-y-auto';
+            container.className = 'flex-1 bg-stone-50/80 p-3 overflow-y-auto';
             
             const isGood = result.isCorrect;
             const colorClass = isGood ? 'emerald' : 'rose';
@@ -1239,44 +1266,44 @@
                             <summary class="flex items-center justify-between p-3 cursor-pointer list-none">
                                 <div class="flex items-center gap-2">
                                     <i class="ph-bold ${icon} text-base text-${colorClass}-500"></i>
-                                    <h3 class="font-bold text-slate-800 text-xs">Анализ ИИ</h3>
+                                    <h3 class="font-bold text-stone-800 text-xs">Анализ ИИ</h3>
                                 </div>
                                 <span class="text-[10px] font-bold px-2 py-0.5 bg-${colorClass}-50 text-${colorClass}-700 rounded-md">${result.score}%</span>
                             </summary>
                             <div class="px-3 pb-3 ml-8">
-                                <p class="text-slate-600 text-xs leading-relaxed">${escapeHtml(result.feedback)}</p>
+                                <p class="text-stone-600 text-xs leading-relaxed">${escapeHtml(result.feedback)}</p>
                             </div>
                         </details>
 
-                        <details class="group bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                        <details class="group bg-white border border-stone-200 rounded-xl shadow-sm overflow-hidden">
                             <summary class="flex items-center justify-between p-3 cursor-pointer list-none">
                                 <div class="flex items-center gap-2">
-                                    <i class="ph-bold ph-user text-base text-slate-400"></i>
-                                    <h3 class="font-bold text-slate-700 text-xs">Ваш ответ</h3>
+                                    <i class="ph-bold ph-user text-base text-stone-400"></i>
+                                    <h3 class="font-bold text-stone-700 text-xs">Ваш ответ</h3>
                                 </div>
-                                <i class="ph-bold ph-caret-down text-slate-300 text-xs group-open:rotate-180 transition-transform"></i>
+                                <i class="ph-bold ph-caret-down text-stone-300 text-xs group-open:rotate-180 transition-transform"></i>
                             </summary>
                             <div class="px-3 pb-3 ml-8">
-                                <div class="text-slate-500 text-xs border-l border-slate-100 pl-3">${escapeHtml(userAnswer)}</div>
+                                <div class="text-stone-500 text-xs border-l border-stone-100 pl-3">${escapeHtml(userAnswer)}</div>
                             </div>
                         </details>
 
-                        <details class="group bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                        <details class="group bg-white border border-stone-200 rounded-xl shadow-sm overflow-hidden">
                             <summary class="flex items-center justify-between p-3 cursor-pointer list-none">
                                 <div class="flex items-center gap-2">
-                                    <i class="ph-bold ph-star text-base text-indigo-400"></i>
-                                    <h3 class="font-bold text-slate-700 text-xs">Эталон</h3>
+                                    <i class="ph-bold ph-star text-base text-amber-400"></i>
+                                    <h3 class="font-bold text-stone-700 text-xs">Эталон</h3>
                                 </div>
-                                <i class="ph-bold ph-caret-down text-slate-300 text-xs group-open:rotate-180 transition-transform"></i>
+                                <i class="ph-bold ph-caret-down text-stone-300 text-xs group-open:rotate-180 transition-transform"></i>
                             </summary>
                             <div class="px-3 pb-3 ml-8">
-                                <div class="text-slate-600 text-xs italic bg-slate-50 p-2 rounded-lg border border-slate-100">${escapeHtml(correctAnswer)}</div>
+                                <div class="text-stone-600 text-xs italic bg-stone-50 p-2 rounded-lg border border-stone-100">${escapeHtml(correctAnswer)}</div>
                             </div>
                         </details>
                     </div>
 
                     <div class="pt-2 mt-auto">
-                        <button onclick="app.nextCard()" class="w-full bg-blue-600 text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-md flex items-center justify-center gap-2 text-sm">
+                        <button onclick="app.nextCard()" class="w-full bg-stone-900 text-white py-3.5 rounded-xl font-bold hover:bg-stone-800 transition-all shadow-md flex items-center justify-center gap-2 text-sm">
                             <span>Далее</span>
                             <i class="ph-bold ph-arrow-right text-xs"></i>
                         </button>
@@ -1287,7 +1314,7 @@
         }
 
         async function checkAnswerAI(userAns, refAns) {
-    const apiKey = window.appState.geminiKey;
+    const apiKey = window.appState.groqKey;
 
     // Функция для локальной проверки (Fallback)
     const calculateOverlap = () => {
@@ -1308,36 +1335,36 @@
 
     try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // Увеличил таймаут до 10 сек
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
 
-        // ИСПОЛЬЗУЕМ СТАБИЛЬНУЮ МОДЕЛЬ gemini-1.5-flash
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+        // USING GROQ API (Fast & Free Tier)
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
             body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: `Role: Friendly mentor.
-Task: Compare User Answer vs Reference Answer based on meaning.
-Reference: "${refAns}"
-User Answer: "${userAns}"
-
-Tone Guidelines:
-- Be encouraging (use "Молодец", "Хорошо", but point out mistakes).
-- Use Russian language.
-
-Output JSON structure:
+                messages: [
+                    {
+                        role: "system",
+                        content: `You are a helpful study assistant. Compare the user's answer to the reference based on meaning, not just keywords.
+Output ONLY valid JSON with this structure:
 {
-    "score": (0-100 int),
-    "feedback": (Russian, max 15 words),
-    "isCorrect": (boolean, true if score > 60)
+    "score": <number 0-100>,
+    "feedback": "<short russian comment, max 15 words>",
+    "isCorrect": <boolean, true if score > 60>
 }`
-                    }]
-                }],
-                // ВАЖНО: Включаем режим JSON, чтобы модель не писала лишнего текста
-                generationConfig: {
-                    responseMimeType: "application/json"
-                }
+                    },
+                    {
+                        role: "user",
+                        content: `Reference: "${refAns}"\nUser Answer: "${userAns}"`
+                    }
+                ],
+                model: "llama-3.3-70b-versatile",
+                temperature: 0.3,
+                max_tokens: 150,
+                response_format: { type: "json_object" }
             }),
             signal: controller.signal
         });
@@ -1346,21 +1373,11 @@ Output JSON structure:
 
         if (!response.ok) throw new Error('AI Error: ' + response.status);
         const data = await response.json();
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        const text = data.choices?.[0]?.message?.content;
 
         if (!text) throw new Error('Empty AI response');
 
-        // РОБАСТНЫЙ ПАРСИНГ: Находим JSON внутри текста (на всякий случай)
-        const jsonStartIndex = text.indexOf('{');
-        const jsonEndIndex = text.lastIndexOf('}');
-        
-        if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
-            const jsonStr = text.substring(jsonStartIndex, jsonEndIndex + 1);
-            return JSON.parse(jsonStr);
-        } else {
-             // Если не нашли скобки, пробуем парсить как есть
-            return JSON.parse(text);
-        }
+        return JSON.parse(text);
 
     } catch (e) {
         console.warn("AI Failed, using fallback. Reason:", e);
@@ -1385,6 +1402,12 @@ Output JSON structure:
                 case 'list':
                     if (listId) cards = cards.filter(c => c.listId === listId);
                     break;
+                case 'multi':
+                    // listId здесь будет массивом ID
+                    if (Array.isArray(listId)) {
+                        cards = cards.filter(c => listId.includes(c.listId));
+                    }
+                    break;
                 case 'smart':
                     cards = cards.filter(c => (c.correct || 0) <= 2);
                     break;
@@ -1405,7 +1428,7 @@ Output JSON structure:
             const el = document.getElementById('toast');
             const txt = document.getElementById('toast-msg');
             txt.innerText = msg;
-            el.className = `fixed top-20 left-1/2 transform -translate-x-1/2 px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300 z-[70] flex items-center gap-2 font-medium text-sm w-max max-w-[90vw] backdrop-blur-md ${isError ? 'bg-rose-600/90 text-white' : 'bg-slate-800/90 text-white'}`;
+            el.className = `fixed top-20 left-1/2 transform -translate-x-1/2 px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300 z-[70] flex items-center gap-2 font-medium text-sm w-max max-w-[90vw] backdrop-blur-md ${isError ? 'bg-rose-600/90 text-white' : 'bg-stone-800/90 text-white'}`;
             requestAnimationFrame(() => {
                 el.style.opacity = '1';
                 el.style.transform = 'translate(-50%, 0)';
@@ -1431,7 +1454,7 @@ Output JSON structure:
 
             if (filteredCards.length === 0) {
                 return `
-                    <div class="text-center py-10 text-slate-400">
+                    <div class="text-center py-10 text-stone-400">
                         <i class="ph-light ph-files text-4xl mb-2"></i>
                         <p>В этом списке пока нет карточек</p>
                     </div>
@@ -1442,25 +1465,25 @@ Output JSON structure:
                 const listName = window.appState.lists.find(l => l.id === c.listId)?.name || 'Без списка';
 
                 return `
-                    <div class="bg-white p-5 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-50 group">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm hover:shadow-md transition border border-stone-50 group">
                         <div class="flex justify-between items-start gap-4">
                             <div class="flex-1 min-w-0">
-                                <span class="text-[9px] font-bold text-blue-500 uppercase tracking-wider mb-1 block">${escapeHtml(listName)}</span>
+                                <span class="text-[9px] font-bold text-stone-500 uppercase tracking-wider mb-1 block">${escapeHtml(listName)}</span>
                                 
-                                <h3 class="font-bold text-slate-800 text-base mb-1 truncate">${escapeHtml(c.question)}</h3>
-                                <p class="text-slate-500 text-sm line-clamp-2 leading-relaxed">${escapeHtml(c.answer)}</p>
+                                <h3 class="font-bold text-stone-800 text-base mb-1 truncate">${escapeHtml(c.question)}</h3>
+                                <p class="text-stone-500 text-sm line-clamp-2 leading-relaxed">${escapeHtml(c.answer)}</p>
                             </div>
                             <div class="flex gap-2 shrink-0">
-                                <button onclick="app.openEditModal('${c.id}')" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-blue-50 hover:text-blue-600 transition">
+                                <button onclick="app.openEditModal('${c.id}')" class="w-8 h-8 rounded-lg bg-stone-100 text-stone-500 flex items-center justify-center hover:bg-stone-200 hover:text-stone-800 transition">
                                     <i class="ph-bold ph-pencil-simple"></i>
                                 </button>
-                                <button onclick="app.deleteCard('${c.id}')" class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-rose-50 hover:text-rose-600 transition">
+                                <button onclick="app.deleteCard('${c.id}')" class="w-8 h-8 rounded-lg bg-stone-100 text-stone-500 flex items-center justify-center hover:bg-rose-50 hover:text-rose-600 transition">
                                     <i class="ph-bold ph-trash"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="mt-3 pt-3 border-t border-slate-50 flex items-center flex-wrap gap-2">
-                            <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-1 rounded-md">Всего: ${c.attempts || 0}</span>
+                        <div class="mt-3 pt-3 border-t border-stone-50 flex items-center flex-wrap gap-2">
+                            <span class="text-[10px] font-bold bg-stone-100 text-stone-500 px-2 py-1 rounded-md">Всего: ${c.attempts || 0}</span>
                             <span class="text-[10px] font-bold bg-emerald-50 text-emerald-600 px-2 py-1 rounded-md flex items-center gap-1">
                                 <i class="ph-bold ph-check"></i> ${c.correct || 0}
                             </span>
@@ -1469,7 +1492,7 @@ Output JSON structure:
                             </span>
                             
                             ${(c.correct || 0) > 2 ? `
-                                <span class="text-[10px] font-semibold bg-blue-50 text-blue-600 px-2 py-1 rounded-md flex items-center gap-1 ml-auto">
+                                <span class="text-[10px] font-semibold bg-stone-100 text-stone-600 px-2 py-1 rounded-md flex items-center gap-1 ml-auto">
                                     <i class="ph-fill ph-seal-check"></i> Освоено
                                 </span>
                             ` : ''}
@@ -1484,21 +1507,21 @@ Output JSON structure:
             const view = window.appState.currentView;
             
             document.querySelectorAll('.nav-item, .mob-nav-item').forEach(el => {
-                el.classList.remove('bg-blue-50', 'text-blue-600', 'bg-slate-100'); 
-                if(el.classList.contains('nav-item')) el.classList.add('text-slate-500');
-                if(el.classList.contains('mob-nav-item')) el.classList.add('text-slate-400');
+                el.classList.remove('bg-stone-50', 'text-stone-900', 'bg-stone-100'); 
+                if(el.classList.contains('nav-item')) el.classList.add('text-stone-500');
+                if(el.classList.contains('mob-nav-item')) el.classList.add('text-stone-400');
             });
             
             const activeDesktop = document.getElementById(`nav-${view}`);
             const activeMobile = document.getElementById(`mob-nav-${view}`);
             
             if(activeDesktop) {
-                activeDesktop.classList.remove('text-slate-500');
-                activeDesktop.classList.add('bg-blue-50', 'text-blue-600');
+                activeDesktop.classList.remove('text-stone-500');
+                activeDesktop.classList.add('bg-stone-50', 'text-stone-900');
             }
             if(activeMobile) {
-                activeMobile.classList.remove('text-slate-400');
-                activeMobile.classList.add('text-blue-600');
+                activeMobile.classList.remove('text-stone-400');
+                activeMobile.classList.add('text-stone-900');
             }
 
             if (view === 'dashboard') {
@@ -1516,22 +1539,22 @@ Output JSON structure:
                 container.innerHTML = `
                     <div class="max-w-md mx-auto fade-in pt-14 md:pt-10">
                         <div class="px-6 mb-6">
-                            <span class="text-sm font-semibold text-slate-400 tracking-wide uppercase"> </span>
+                            <span class="text-sm font-semibold text-stone-400 tracking-wide uppercase"> </span>
                         </div>
-                        <div class="mx-4 bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 p-5 md:p-6">
+                        <div class="mx-4 bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 p-5 md:p-6">
                             <div class="flex justify-between items-center mb-6">
                                 <div>
-                                    <h2 class="text-lg font-bold text-slate-800">Обзор</h2>
-                                    <span class="text-blue-600 font-bold text-sm">${total} всего</span>
+                                    <h2 class="text-lg font-bold text-stone-800">Обзор</h2>
+                                    <span class="text-stone-500 font-bold text-sm">${total} всего</span>
                                 </div>
-                                <div class="flex bg-slate-100 rounded-lg p-1 gap-1">
-                                    <button onclick="app.setChartPeriod(7)" class="text-xs px-2.5 py-1 rounded-md font-semibold transition ${period === 7 ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">7</button>
-                                    <button onclick="app.setChartPeriod(14)" class="text-xs px-2.5 py-1 rounded-md font-semibold transition ${period === 14 ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">14</button>
-                                    <button onclick="app.setChartPeriod(30)" class="text-xs px-2.5 py-1 rounded-md font-semibold transition ${period === 30 ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">30</button>
+                                <div class="flex bg-stone-100 rounded-lg p-1 gap-1">
+                                    <button onclick="app.setChartPeriod(7)" class="text-xs px-2.5 py-1 rounded-md font-semibold transition ${period === 7 ? 'bg-white text-stone-800 shadow-sm' : 'text-stone-400 hover:text-stone-600'}">7</button>
+                                    <button onclick="app.setChartPeriod(14)" class="text-xs px-2.5 py-1 rounded-md font-semibold transition ${period === 14 ? 'bg-white text-stone-800 shadow-sm' : 'text-stone-400 hover:text-stone-600'}">14</button>
+                                    <button onclick="app.setChartPeriod(30)" class="text-xs px-2.5 py-1 rounded-md font-semibold transition ${period === 30 ? 'bg-white text-stone-800 shadow-sm' : 'text-stone-400 hover:text-stone-600'}">30</button>
                                 </div>
                             </div>
                             
-                            <div class="h-40 flex items-end justify-around gap-px mb-8 px-5 border-b border-slate-100 pb-2">
+                            <div class="h-40 flex items-end justify-around gap-px mb-8 px-5 border-b border-stone-100 pb-2">
                 ${chartData.map((d, i) => {
                     const isToday = i === chartData.length - 1;
                     
@@ -1544,7 +1567,7 @@ Output JSON structure:
 
                     return `
                     <div class="flex-1 flex flex-col items-center gap-2 h-40 justify-end">
-                        <div class="${barWidth} flex flex-col justify-end bg-slate-100 rounded-t-sm overflow-hidden h-32">
+                        <div class="${barWidth} flex flex-col justify-end bg-stone-100 rounded-t-sm overflow-hidden h-32">
                             
                             <div class="w-full bg-amber-300 transition-all duration-1000 flex items-center justify-center text-[7px] font-black text-amber-900/60" 
                                  style="height: ${hRepeated}%; min-height: ${d.repeatedCount > 0 ? '10px' : '0'};" 
@@ -1559,7 +1582,7 @@ Output JSON structure:
                             </div>
                             
                         </div>
-                        <span class="text-[8px] font-bold text-slate-400 transition-opacity duration-300 ${showLabel ? 'opacity-100' : 'opacity-0'}">${d.day}</span>
+                        <span class="text-[8px] font-bold text-stone-400 transition-opacity duration-300 ${showLabel ? 'opacity-100' : 'opacity-0'}">${d.day}</span>
                     </div>
                     `;
                 }).join('')}
@@ -1569,40 +1592,37 @@ Output JSON structure:
                                  <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
                                         <div class="w-3.5 h-3.5 rounded bg-amber-300 shadow-sm shadow-amber-200"></div>
-                                        <span class="text-slate-600 font-medium text-sm">Всего карточек</span>
+                                        <span class="text-stone-600 font-medium text-sm">Всего карточек</span>
                                     </div>
-                                    <span class="font-bold text-slate-800 text-base">${total}</span>
+                                    <span class="font-bold text-stone-800 text-base">${total}</span>
                                  </div>
                                  <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
                                         <div class="w-3.5 h-3.5 rounded bg-emerald-400 shadow-sm shadow-emerald-200"></div>
-                                        <span class="text-slate-600 font-medium text-sm">Выучено</span>
+                                        <span class="text-stone-600 font-medium text-sm">Выучено</span>
                                     </div>
-                                    <span class="font-bold text-slate-800 text-base">${learned}</span>
+                                    <span class="font-bold text-stone-800 text-base">${learned}</span>
                                  </div>
                                  <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-3.5 h-3.5 rounded bg-slate-300 shadow-sm shadow-slate-200"></div>
-                                        <span class="text-slate-600 font-medium text-sm">Точность</span>
+                                        <div class="w-3.5 h-3.5 rounded bg-stone-300 shadow-sm shadow-stone-200"></div>
+                                        <span class="text-stone-600 font-medium text-sm">Точность</span>
                                     </div>
-                                    <span class="font-bold text-slate-800 text-base">${accuracy}%</span>
+                                    <span class="font-bold text-stone-800 text-base">${accuracy}%</span>
                                  </div>
                             </div>
                         </div>
                         
                         <div class="hidden md:grid grid-cols-2 gap-4 mt-8 px-4">
-                             <button onclick="app.openAddModal()" class="bg-white text-slate-700 py-3.5 rounded-2xl font-bold shadow-sm border border-slate-200 hover:bg-slate-50 transition flex items-center justify-center gap-2 text-sm">
+                             <button onclick="app.openAddModal()" class="bg-white text-stone-700 py-3.5 rounded-2xl font-bold shadow-sm border border-stone-200 hover:bg-stone-50 transition flex items-center justify-center gap-2 text-sm">
                                 <i class="ph-bold ph-plus-circle text-lg"></i> Добавить
                              </button>
-                             <button onclick="app.navigate('study')" class="bg-blue-600 text-white py-3.5 rounded-2xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition flex items-center justify-center gap-2 text-sm">
+                             <button onclick="app.navigate('study')" class="bg-stone-900 text-white py-3.5 rounded-2xl font-bold shadow-lg shadow-stone-200 hover:bg-stone-800 transition flex items-center justify-center gap-2 text-sm">
                                 <i class="ph-bold ph-play-circle text-lg"></i> Учить
                              </button>
                           </div>
                     </div>
                 `;
-                setTimeout(() => {
-                    document.querySelectorAll('.chart-bar').forEach(el => { el.style.opacity = '1'; });
-                }, 100);
             }
 
             else if (view === 'cards') {
@@ -1611,25 +1631,25 @@ Output JSON structure:
                 container.innerHTML = `
                     <div class="max-w-md mx-auto fade-in pb-20 pt-14 md:pt-10 px-4">
                         <div class="flex items-center justify-between mb-4 mt-4">
-                            <h1 class="text-2xl font-bold text-slate-800">Карточки</h1>
-                            <button onclick="app.openListModal()" class="text-blue-600 font-bold text-sm flex items-center gap-1">
+                            <h1 class="text-2xl font-bold text-stone-800">Карточки</h1>
+                            <button onclick="app.openListModal()" class="text-stone-600 font-bold text-sm flex items-center gap-1 hover:text-stone-900 transition">
                                 <i class="ph-bold ph-plus"></i> Список
                             </button>
                         </div>
 
                         <div class="flex gap-2 overflow-x-auto pb-4 mb-2 no-scrollbar">
                             <button onclick="app.setActiveList('all')" 
-                                class="px-4 py-2 rounded-full whitespace-nowrap text-sm font-bold transition ${activeId === 'all' ? 'bg-blue-600 text-white shadow-lg' : 'bg-white text-slate-500 border border-slate-200'}">
+                                class="px-4 py-2 rounded-full whitespace-nowrap text-sm font-bold transition ${activeId === 'all' ? 'bg-stone-900 text-white shadow-lg' : 'bg-white text-stone-500 border border-stone-200'}">
                                 Все
                             </button>
                             ${window.appState.lists.map(l => `
                                 <div class="relative flex-shrink-0 group">
                                     <button onclick="app.setActiveList('${l.id}')" 
-                                        class="pl-4 pr-10 py-2 rounded-full whitespace-nowrap text-sm font-bold transition ${activeId === l.id ? 'bg-blue-600 text-white shadow-lg' : 'bg-white text-slate-500 border border-slate-200'}">
+                                        class="pl-4 pr-10 py-2 rounded-full whitespace-nowrap text-sm font-bold transition ${activeId === l.id ? 'bg-stone-900 text-white shadow-lg' : 'bg-white text-stone-500 border border-stone-200'}">
                                         ${escapeHtml(l.name)}
                                     </button>
                                     <button onclick="event.stopPropagation(); app.openConfirmModal('deleteList', '${l.id}')" 
-                                        class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center hover:bg-black/10 transition ${activeId === l.id ? 'text-white/70 hover:text-white' : 'text-slate-300 hover:text-rose-500'}">
+                                        class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center hover:bg-black/10 transition ${activeId === l.id ? 'text-white/70 hover:text-white' : 'text-stone-300 hover:text-rose-500'}">
                                         <i class="ph-bold ph-x text-[10px]"></i>
                                     </button>
                                 </div>
@@ -1637,18 +1657,18 @@ Output JSON structure:
                         </div>
 
                         <div class="grid grid-cols-2 gap-3 mb-6">
-                            <button onclick="app.openAddModal()" class="flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 py-3 rounded-2xl font-bold text-xs hover:bg-slate-50 transition shadow-sm">
-                                <i class="ph-bold ph-plus-circle text-lg text-blue-500"></i> Добавить
+                            <button onclick="app.openAddModal()" class="flex items-center justify-center gap-2 bg-white border border-stone-200 text-stone-700 py-3 rounded-2xl font-bold text-xs hover:bg-stone-50 transition shadow-sm">
+                                <i class="ph-bold ph-plus-circle text-lg text-stone-500"></i> Добавить
                             </button>
-                            <button onclick="app.openBulkModal()" class="flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 py-3 rounded-2xl font-bold text-xs hover:bg-slate-50 transition shadow-sm">
-                                <i class="ph-bold ph-file-arrow-up text-lg text-indigo-500"></i> Импорт
+                            <button onclick="app.openBulkModal()" class="flex items-center justify-center gap-2 bg-white border border-stone-200 text-stone-700 py-3 rounded-2xl font-bold text-xs hover:bg-stone-50 transition shadow-sm">
+                                <i class="ph-bold ph-file-arrow-up text-lg text-stone-400"></i> Импорт
                             </button>
                         </div>
 
                         <div class="relative mb-6">
-                            <i class="ph-light ph-magnifying-glass absolute left-4 top-2 text-slate-400 text-lg"></i>
+                            <i class="ph-light ph-magnifying-glass absolute left-4 top-2 text-stone-400 text-lg"></i>
                             <input type="text" oninput="app.setSearchTerm(this.value)" value="${window.appState.searchTerm}" 
-                                class="w-full pl-11 pr-4 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-blue-500 outline-none text-sm" 
+                                class="w-full pl-11 pr-4 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-stone-400 outline-none text-sm" 
                                 placeholder="Поиск в этом списке...">
                         </div>
 
@@ -1661,7 +1681,7 @@ Output JSON structure:
 
             else if (view === 'study') {
                 if (!window.appState.isDataLoaded) {
-                    container.innerHTML = `<div class="h-full flex flex-col items-center justify-center"><i class="ph-light ph-spinner animate-spin text-4xl text-blue-500 mb-4"></i></div>`;
+                    container.innerHTML = `<div class="h-full flex flex-col items-center justify-center"><i class="ph-light ph-spinner animate-spin text-4xl text-stone-400 mb-4"></i></div>`;
                     return;
                 }
 
@@ -1687,44 +1707,44 @@ Output JSON structure:
                     <div class="max-w-md mx-auto fade-in pb-10 pt-14 md:pt-10">
                         
                         <div class="px-6 mb-2 mt-4">
-                            <span class="text-sm font-semibold text-slate-400 tracking-wide uppercase">AI Настройки</span>
+                            <span class="text-sm font-semibold text-stone-400 tracking-wide uppercase">AI Настройки</span>
                         </div>
 
                         <div class="mx-4 space-y-6">
-                            <div class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden">
-                                <div class="p-8 bg-slate-800 text-white">
+                            <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 overflow-hidden">
+                                <div class="p-8 bg-stone-800 text-white">
                                     <div class="flex items-center gap-4 mb-2">
                                          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
                                             <i class="ph-fill ph-robot text-2xl"></i>
                                          </div>
-                                         <h2 class="text-xl font-bold">AI Ассистент</h2>
+                                         <h2 class="text-xl font-bold">Groq AI (Free)</h2>
                                     </div>
-                                    <p class="text-slate-300 text-sm opacity-90 leading-relaxed">Используйте Gemini API для умной проверки ваших ответов.</p>
+                                    <p class="text-stone-300 text-sm opacity-90 leading-relaxed">Бесплатный и сверхбыстрый API для проверки ответов (Llama 3).</p>
                                 </div>
                                 
                                 <div class="p-8 space-y-4">
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 mb-2">API Key</label>
+                                        <label class="block text-sm font-bold text-stone-700 mb-2">Groq API Key</label>
                                         <div class="relative">
-                                            <i class="ph-bold ph-key absolute left-4 top-2 text-slate-400 text-lg"></i>
-                                            <input type="password" id="api-key-input" value="${window.appState.geminiKey}" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition font-mono text-sm" placeholder="AIzaSy...">
+                                            <i class="ph-bold ph-key absolute left-4 top-2 text-stone-400 text-lg"></i>
+                                            <input type="password" id="api-key-input" value="${window.appState.groqKey}" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-stone-400 outline-none transition font-mono text-sm" placeholder="gsk_...">
                                         </div>
                                     </div>
-                                    <button onclick="app.saveSettings()" class="w-full bg-blue-600 text-white py-3.5 rounded-xl hover:bg-blue-700 transition font-bold text-sm shadow-lg shadow-blue-200">
+                                    <button onclick="app.saveSettings()" class="w-full bg-stone-900 text-white py-3.5 rounded-xl hover:bg-stone-800 transition font-bold text-sm shadow-lg shadow-stone-200">
                                         Сохранить настройки
                                     </button>
                                 </div>
                             </div>
 
-                            <div class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 p-8 space-y-4">
-                                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Аккаунт</h3>
+                            <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 p-8 space-y-4">
+                                <h3 class="text-sm font-bold text-stone-400 uppercase tracking-wider mb-2">Аккаунт</h3>
                                 
-                                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 mb-4">
-                                    <p class="text-xs text-slate-500 uppercase font-bold mb-1">Email</p>
-                                    <p class="text-sm font-medium text-slate-800">${user.email || 'Анонимный пользователь'}</p>
+                                <div class="p-4 bg-stone-50 rounded-xl border border-stone-100 mb-4">
+                                    <p class="text-xs text-stone-500 uppercase font-bold mb-1">Email</p>
+                                    <p class="text-sm font-medium text-stone-800">${user.email || 'Анонимный пользователь'}</p>
                                 </div>
 
-                                <button onclick="app.handleLogout()" class="w-full flex items-center justify-between px-5 py-4 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-2xl transition group border border-slate-100">
+                                <button onclick="app.handleLogout()" class="w-full flex items-center justify-between px-5 py-4 bg-stone-50 hover:bg-stone-100 text-stone-700 rounded-2xl transition group border border-stone-100">
                                     <div class="flex items-center gap-3">
                                         <i class="ph-bold ph-sign-out text-xl"></i>
                                         <span class="font-bold text-sm">Выйти из аккаунта</span>
@@ -1733,10 +1753,10 @@ Output JSON structure:
                                 </button>
                             </div>
 
-                            <div class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 p-8 space-y-4">
+                            <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 p-8 space-y-4">
                                 <h3 class="text-sm font-bold text-rose-500 uppercase tracking-wider mb-2">Опасная зона</h3>
                                 
-                                <button onclick="app.openConfirmModal('reset')" class="w-full flex items-center justify-between px-5 py-4 bg-slate-50 hover:bg-amber-50 text-slate-700 hover:text-amber-700 rounded-2xl transition group border border-slate-100">
+                                <button onclick="app.openConfirmModal('reset')" class="w-full flex items-center justify-between px-5 py-4 bg-stone-50 hover:bg-amber-50 text-stone-700 hover:text-amber-700 rounded-2xl transition group border border-stone-100">
                                     <div class="flex items-center gap-3">
                                         <i class="ph-bold ph-arrows-counter-clockwise text-xl"></i>
                                         <span class="font-bold text-sm">Обнулить прогресс</span>
@@ -1744,7 +1764,7 @@ Output JSON structure:
                                     <i class="ph-bold ph-caret-right text-xs opacity-30 group-hover:opacity-100"></i>
                                 </button>
 
-                                <button onclick="app.openConfirmModal('delete')" class="w-full flex items-center justify-between px-5 py-4 bg-slate-50 hover:bg-rose-50 text-slate-700 hover:text-rose-700 rounded-2xl transition group border border-slate-100">
+                                <button onclick="app.openConfirmModal('delete')" class="w-full flex items-center justify-between px-5 py-4 bg-stone-50 hover:bg-rose-50 text-stone-700 hover:text-rose-700 rounded-2xl transition group border border-stone-100">
                                     <div class="flex items-center gap-3">
                                         <i class="ph-bold ph-trash text-xl"></i>
                                         <span class="font-bold text-sm">Удалить все карточки</span>
@@ -1754,8 +1774,8 @@ Output JSON structure:
                             </div>
                             
                             <div class="text-center">
-                                 <a href="https://aistudio.google.com/" target="_blank" class="inline-flex items-center gap-2 text-xs text-slate-400 font-medium hover:text-blue-600 transition">
-                                    <span>Документация Gemini API</span>
+                                 <a href="https://console.groq.com/keys" target="_blank" class="inline-flex items-center gap-2 text-xs text-stone-400 font-medium hover:text-stone-600 transition">
+                                    <span>Получить бесплатный Groq Key</span>
                                     <i class="ph-bold ph-arrow-square-out"></i>
                                 </a>
                             </div>
@@ -1776,36 +1796,36 @@ Output JSON structure:
                 <div class="max-w-md mx-auto h-full flex flex-col fade-in pb-2 pt-14 md:pt-10">
                 <div class="mx-6 mb-2 mt-4 flex items-center justify-between shrink-0 h-12">
                     <button onclick="app.exitStudy()" 
-                        class="w-12 h-12 -ml-3 flex items-center justify-center text-slate-400 hover:text-blue-500 transition-colors active:scale-90"
+                        class="w-12 h-12 -ml-3 flex items-center justify-center text-stone-400 hover:text-stone-600 transition-colors active:scale-90"
                         style="-webkit-tap-highlight-color: transparent;">
                         <i class="ph-bold ph-caret-left text-2xl"></i>
                     </button>
 
-                    <div class="flex-1 max-w-[400px] mx-auto bg-slate-200/60 h-2.5 rounded-full overflow-hidden shadow-inner relative">
-                        <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-full transition-all duration-700 ease-out rounded-full shadow-[0_0_8px_rgba(37,99,235,0.3)]" 
+                    <div class="flex-1 max-w-[400px] mx-auto bg-stone-200/60 h-2.5 rounded-full overflow-hidden shadow-inner relative">
+                        <div class="bg-gradient-to-r from-amber-400 to-amber-600 h-full transition-all duration-700 ease-out rounded-full shadow-[0_0_8px_rgba(234,88,12,0.3)]" 
                              style="width: ${progress}%">
                         </div>
                     </div>
 
-                    <span class="text-[11px] font-black uppercase tracking-tighter text-slate-500 tabular-nums">
-                        ${currentIndex + 1} <span class="text-slate-300">/</span> ${total}
+                    <span class="text-[11px] font-black uppercase tracking-tighter text-stone-500 tabular-nums">
+                        ${currentIndex + 1} <span class="text-stone-300">/</span> ${total}
                     </span>
                 </div>
 
-                    <div class="mx-4 bg-white rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden flex flex-col flex-1 relative min-h-0 mb-1">
-                        <div class="p-6 md:p-8 border-b border-slate-50 bg-white shrink-0 flex items-center justify-center min-h-[25%]">
-                            <h2 class="text-xl md:text-2xl font-bold text-slate-800 text-center leading-tight">${escapeHtml(card.question)}</h2>
+                    <div class="mx-4 bg-white rounded-[2rem] shadow-xl border border-stone-100 overflow-hidden flex flex-col flex-1 relative min-h-0 mb-1">
+                        <div class="p-6 md:p-8 border-b border-stone-50 bg-white shrink-0 flex items-center justify-center min-h-[25%]">
+                            <h2 class="text-xl md:text-2xl font-bold text-stone-800 text-center leading-tight">${escapeHtml(card.question)}</h2>
                         </div>
 
-                        <div id="interaction-area" class="flex-1 bg-slate-50/50 p-4 flex flex-col min-h-0">
+                        <div id="interaction-area" class="flex-1 bg-stone-50/50 p-4 flex flex-col min-h-0">
                             <div class="flex flex-col gap-3 h-full">
-                                <textarea id="study-input" class="w-full flex-1 p-4 bg-white border-none rounded-xl focus:ring-2 focus:ring-blue-100 outline-none transition text-base resize-none shadow-sm placeholder-slate-300" placeholder="Ваш ответ..."></textarea>
+                                <textarea id="study-input" class="w-full flex-1 p-4 bg-white border-none rounded-xl focus:ring-2 focus:ring-amber-100 outline-none transition text-base resize-none shadow-sm placeholder-stone-300" placeholder="Ваш ответ..."></textarea>
                                 
                                 <div class="grid grid-cols-3 gap-2 shrink-0">
-                                    <button onclick="app.skipCard()" class="col-span-1 bg-white text-slate-400 py-3 rounded-xl font-bold hover:bg-slate-50 transition text-xs border border-slate-100">
+                                    <button onclick="app.skipCard()" class="col-span-1 bg-white text-stone-400 py-3 rounded-xl font-bold hover:bg-stone-50 transition text-xs border border-stone-100">
                                         Пропуск
                                     </button>
-                                    <button id="submit-btn" onclick="app.submitAnswer()" class="col-span-2 bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition shadow-md flex items-center justify-center gap-2 text-sm">
+                                    <button id="submit-btn" onclick="app.submitAnswer()" class="col-span-2 bg-stone-900 text-white py-3 rounded-xl font-bold hover:bg-stone-800 transition shadow-md flex items-center justify-center gap-2 text-sm">
                                         <span id="submit-btn-text">Проверить</span>
                                     </button>
                                 </div>
