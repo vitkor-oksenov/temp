@@ -1583,7 +1583,7 @@ Output ONLY valid JSON with this structure:
         <div class="max-w-md mx-auto fade-in pt-14 md:pt-10 px-4">
             <h1 class="text-2xl font-bold text-stone-800 mb-6 px-2 mt-4">Обзор</h1>
             
-            <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 p-5 md:p-6 border border-stone-50">
+            <div class="bg-white rounded-[2rem] shadow-xl shadow-stone-200/25 p-5 md:p-6 border border-stone-50">
                 <div class="flex justify-between items-center mb-6">
                     <div>
                         <span class="text-stone-500 font-bold text-sm uppercase tracking-tight">${total} карточек всего</span>
@@ -1648,71 +1648,74 @@ Output ONLY valid JSON with this structure:
                 </div>
             </div>
             
-            <div class="hidden md:grid grid-cols-2 gap-4 mt-8 px-4">
-                 <button onclick="app.openAddModal()" class="bg-white text-stone-700 py-3.5 rounded-2xl font-bold shadow-sm border border-stone-200 hover:bg-stone-50 transition flex items-center justify-center gap-2 text-sm">
-                    <i class="ph-bold ph-plus-circle text-lg"></i> Добавить
-                 </button>
-                 <button onclick="app.navigate('study')" class="bg-stone-900 text-white py-3.5 rounded-2xl font-bold shadow-lg shadow-stone-200 hover:bg-stone-800 transition flex items-center justify-center gap-2 text-sm">
-                    <i class="ph-bold ph-play-circle text-lg"></i> Учить
-                 </button>
-            </div>
+            <div class="grid grid-cols-2 gap-4 mt-8 px-2">
+     <button onclick="app.openAddModal()" class="bg-white text-stone-700 py-4 rounded-2xl font-bold shadow-sm border border-stone-200 active:scale-95 transition flex flex-col items-center justify-center gap-1 text-[11px] uppercase tracking-wider">
+        <i class="ph-bold ph-plus-circle text-xl"></i> 
+        <span>Добавить</span>
+     </button>
+     <button onclick="app.navigate('study')" class="bg-stone-900 text-white py-4 rounded-2xl font-bold shadow-lg shadow-stone-200 active:scale-95 transition flex flex-col items-center justify-center gap-1 text-[11px] uppercase tracking-wider">
+        <i class="ph-bold ph-play-circle text-xl"></i> 
+        <span>Учить</span>
+     </button>
+</div>
         </div>
     `;
 }
 
             else if (view === 'cards') {
-                const activeId = window.appState.activeListId;
-                
-                container.innerHTML = `
-                    <div class="max-w-md mx-auto fade-in pb-20 pt-14 md:pt-10 px-4">
-                        <div class="flex items-center justify-between mb-4 mt-4">
-                            <h1 class="text-2xl font-bold text-stone-800 px-2">Карточки</h1>
-                            <button onclick="app.openListModal()" class="text-stone-600 font-bold text-sm flex items-center gap-1 hover:text-stone-900 transition">
-                                <i class="ph-bold ph-plus"></i> Список
-                            </button>
-                        </div>
+    const activeId = window.appState.activeListId;
+    
+    container.innerHTML = `
+        <div class="max-w-md mx-auto fade-in pb-24 pt-14 md:pt-10 px-4">
+            <div class="flex items-center justify-between mb-6 mt-4 px-2">
+                <h1 class="text-2xl font-bold text-stone-800">Карточки</h1>
+                <button onclick="app.openListModal()" class="text-stone-500 hover:text-stone-900 transition flex items-center gap-1.5 text-sm font-bold">
+                    <i class="ph-bold ph-plus-circle text-lg"></i>
+                    <span>Список</span>
+                </button>
+            </div>
 
-                        <div class="flex gap-2 overflow-x-auto pb-4 mb-2 no-scrollbar">
-                            <button onclick="app.setActiveList('all')" 
-                                class="px-4 py-2 rounded-full whitespace-nowrap text-sm font-bold transition ${activeId === 'all' ? 'bg-stone-900 text-white shadow-lg' : 'bg-white text-stone-500 border border-stone-200'}">
-                                Все
-                            </button>
-                            ${window.appState.lists.map(l => `
-                                <div class="relative flex-shrink-0 group">
-                                    <button onclick="app.setActiveList('${l.id}')" 
-                                        class="pl-4 pr-10 py-2 rounded-full whitespace-nowrap text-sm font-bold transition ${activeId === l.id ? 'bg-stone-900 text-white shadow-lg' : 'bg-white text-stone-500 border border-stone-200'}">
-                                        ${escapeHtml(l.name)}
-                                    </button>
-                                    <button onclick="event.stopPropagation(); app.openConfirmModal('deleteList', '${l.id}')" 
-                                        class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center hover:bg-black/10 transition ${activeId === l.id ? 'text-white/70 hover:text-white' : 'text-stone-300 hover:text-rose-500'}">
-                                        <i class="ph-bold ph-x text-[10px]"></i>
-                                    </button>
-                                </div>
-                            `).join('')}
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3 mb-6">
-                            <button onclick="app.openAddModal()" class="flex items-center justify-center gap-2 bg-white border border-stone-200 text-stone-700 py-3 rounded-2xl font-bold text-xs hover:bg-stone-50 transition shadow-sm">
-                                <i class="ph-bold ph-plus-circle text-lg text-stone-500"></i> Добавить
-                            </button>
-                            <button onclick="app.openBulkModal()" class="flex items-center justify-center gap-2 bg-white border border-stone-200 text-stone-700 py-3 rounded-2xl font-bold text-xs hover:bg-stone-50 transition shadow-sm">
-                                <i class="ph-bold ph-file-arrow-up text-lg text-stone-400"></i> Импорт
-                            </button>
-                        </div>
-
-                        <div class="relative mb-6">
-                            <i class="ph-light ph-magnifying-glass absolute left-4 top-2 text-stone-400 text-lg"></i>
-                            <input type="text" oninput="app.setSearchTerm(this.value)" value="${window.appState.searchTerm}" 
-                                class="w-full pl-11 pr-4 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-stone-400 outline-none text-sm" 
-                                placeholder="Поиск в этом списке...">
-                        </div>
-
-                        <div id="cards-list-container" class="space-y-3">
-                            ${renderCardsItemsHTML()} 
-                        </div>
+            <div class="flex gap-2 overflow-x-auto pb-4 mb-4 no-scrollbar -mx-2 px-2">
+                <button onclick="app.setActiveList('all')" 
+                    class="px-5 py-2 rounded-xl whitespace-nowrap text-xs font-bold transition-all ${activeId === 'all' ? 'bg-stone-900 text-white shadow-md' : 'bg-white text-stone-500 border border-stone-100'}">
+                    Все
+                </button>
+                ${window.appState.lists.map(l => `
+                    <div class="relative flex-shrink-0 group">
+                        <button onclick="app.setActiveList('${l.id}')" 
+                            class="pl-4 pr-10 py-2 rounded-xl whitespace-nowrap text-xs font-bold transition-all ${activeId === l.id ? 'bg-stone-900 text-white shadow-md' : 'bg-white text-stone-500 border border-stone-100'}">
+                            ${escapeHtml(l.name)}
+                        </button>
+                        <button onclick="event.stopPropagation(); app.openConfirmModal('deleteList', '${l.id}')" 
+                            class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-lg flex items-center justify-center transition-colors ${activeId === l.id ? 'text-white/50 hover:text-white' : 'text-stone-300 hover:text-rose-500'}">
+                            <i class="ph ph-x text-[10px]"></i>
+                        </button>
                     </div>
-                `;
-            }
+                `).join('')}
+            </div>
+
+            <div class="relative mb-6">
+                <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-lg"></i>
+                <input type="text" oninput="app.setSearchTerm(this.value)" value="${window.appState.searchTerm}" 
+                    class="w-full pl-11 pr-4 py-3 bg-stone-100/50 border-transparent rounded-2xl focus:bg-white focus:ring-2 focus:ring-stone-200 outline-none transition-all text-sm placeholder-stone-400" 
+                    placeholder="Поиск в этом списке...">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-8">
+                <button onclick="app.openAddModal()" class="flex items-center justify-center gap-2 bg-white border border-stone-200 text-stone-700 py-3.5 rounded-2xl font-bold text-xs hover:bg-stone-50 transition shadow-sm active:scale-95">
+                    <i class="ph-bold ph-plus text-base text-stone-500"></i> Добавить
+                </button>
+                <button onclick="app.openBulkModal()" class="flex items-center justify-center gap-2 bg-white border border-stone-200 text-stone-700 py-3.5 rounded-2xl font-bold text-xs hover:bg-stone-50 transition shadow-sm active:scale-95">
+                    <i class="ph-bold ph-file-arrow-up text-base text-stone-400"></i> Импорт
+                </button>
+            </div>
+
+            <div id="cards-list-container" class="space-y-3">
+                ${renderCardsItemsHTML()} 
+            </div>
+        </div>
+    `;
+}
 
             else if (view === 'study') {
                 if (!window.appState.isDataLoaded) {
